@@ -1,14 +1,13 @@
 import flask
 import requests
 import requesterApp
-import requesterApp.api
-from requesterApp.api import getArtList
+from requesterApp.api import makeRequests
 
 
 @requesterApp.app.route("/api/sendReqs", methods=["GET"]
 def receiveReqs():
     reqs = flask.request.json
-    results = getArtList(reqs)
+    results = makeRequests.getArtList(reqs)
     resp = {}
     resp["response"] = results
     return flask.jsonify(**resp)
