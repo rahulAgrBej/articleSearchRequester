@@ -1,1 +1,2 @@
 import requesterApp.api.makeRequests
+import requesterApp.api.manageRequests
