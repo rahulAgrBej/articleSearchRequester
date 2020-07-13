@@ -57,6 +57,7 @@ def getArtList(req):
 
     # req = flask.request.json
     reqList = req["requests"]
+    print(reqList)
 
     fullResp = []
 
