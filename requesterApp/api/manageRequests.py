@@ -11,5 +11,5 @@ def receiveReqs():
     results = makeRequests.getArtList(reqs)
     print(results)
     resp = {}
-    resp["response"] = results
+    resp["results"] = results
     return flask.jsonify(**resp)

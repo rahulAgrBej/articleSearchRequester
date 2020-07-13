@@ -1,6 +1,7 @@
 import flask
 import requests
 import requesterApp
+import time
 
 MAX_ARTICLES = 250
 STRIPPED = lambda s: "".join(i for i in s if 31 < ord(i) < 127)
@@ -48,9 +49,11 @@ def gdeltAPICall(payload):
     resp = requests.get(gdeltURL, params=payload)
     processedResp = gdeltCleanResp(resp)
 
+    # rate limit of 1 request every 5 seconds
+    time.sleep(5)
+
     if processedResp == None:
         raise Exception('RESULTS COULD NOT BE CLEANED')
-    
     return processedResp
 
 def getArtList(req):
