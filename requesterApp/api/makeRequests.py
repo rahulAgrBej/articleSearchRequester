@@ -75,7 +75,7 @@ def getArtList(req):
 
         articleResults = []
         apiResp = gdeltAPICall(payload)
-        if len(api.keys()) > 0:
+        if len(apiResp.keys()) > 0:
             articles = apiResp["articles"]
             
             if len(articles) >= MAX_ARTICLES:
