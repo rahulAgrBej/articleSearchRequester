@@ -6,10 +6,12 @@ from requesterApp.api import makeRequests
 
 @requesterApp.app.route("/api/sendReqs", methods=["GET"])
 def receiveReqs():
-    reqs = flask.request.json
+    reqs = flask.request.args.get("reqListSent")
+    resp = {}
+    resp["received"] = reqs
     """
     results = makeRequests.getArtList(reqs)
     resp = {}
     resp["response"] = results
     """
-    return flask.jsonify(**reqs)
+    return flask.jsonify(**resp)
