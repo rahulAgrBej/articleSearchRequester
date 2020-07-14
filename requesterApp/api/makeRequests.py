@@ -2,6 +2,8 @@ import flask
 import requests
 import requesterApp
 import time
+import json
+import re
 
 MAX_ARTICLES = 250
 STRIPPED = lambda s: "".join(i for i in s if 31 < ord(i) < 127)
@@ -86,10 +88,11 @@ def getArtList(req):
                 articleResults.append("granular")
                 articleResults.append(currReq)
             else:
-                articleResults.append("results")
+                articleResults.append("hits")
                 articleResults.append(articles)
         else:
             articleResults.append("none")
+            articleResults.append(currReq[1])
         
         fullResp.append(articleResults)
 
