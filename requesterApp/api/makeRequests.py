@@ -33,6 +33,8 @@ def gdeltCleanResp(resp):
     try:
         results = resp.json()
     except json.decoder.JSONDecodeError:
+        print("IN CLEAN")
+        print(resp.text)
         firstStrip = re.sub('\\\\', '', resp.text)
         correctStr = STRIPPED(firstStrip)
         
@@ -42,6 +44,35 @@ def gdeltCleanResp(resp):
             return None
 
     return results
+
+def getTrends(req):
+
+    reqList = req['requests']
+
+    articleFreqResults = []
+
+    for i in range(len(reqList)):
+        currReq = reqList[i]
+        fullQuery = addSourceCountry(currReq[0], currReq[1])
+
+        # builds payload for GDELT request
+        payload = {}
+        payload['QUERY'] = fullQuery
+        payload['MODE'] = 'TimelineVolRaw'
+        payload['FORMAT'] = 'JSON'
+        payload['MAXRECORDS'] = MAX_ARTICLES
+        payload['STARTDATETIME'] = createDateStr(currReq[2], currReq[3])
+        payload['ENDDATETIME'] = createDateStr(currReq[4], currReq[5])
+
+        print("START TIME")
+        print(payload['STARTDATETIME'])
+        print()
+
+        apiResp = gdeltAPICall(payload)
+
+        articleFreqResults.append(apiResp)
+
+    return articleFreqResults
 
 def gdeltAPICall(payload):
 
@@ -78,6 +109,10 @@ def getArtList(req):
         payload['MAXRECORDS'] = MAX_ARTICLES
         payload['STARTDATETIME'] = createDateStr(currReq[2], currReq[3])
         payload['ENDDATETIME'] = createDateStr(currReq[4], currReq[5])
+
+        print("START TIME")
+        print(payload['STARTDATETIME'])
+        print()
 
         articleResults = []
         apiResp = gdeltAPICall(payload)
