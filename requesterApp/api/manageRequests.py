@@ -9,7 +9,6 @@ from requesterApp.api import makeRequests
 def receiveReqs():
     reqs = json.loads(flask.request.args.get("reqListSent"))
     results = makeRequests.getArtList(reqs)
-    print(results)
     resp = {}
     resp["results"] = results
     return flask.jsonify(**resp)

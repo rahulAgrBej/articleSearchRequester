@@ -64,10 +64,6 @@ def getTrends(req):
         payload['STARTDATETIME'] = createDateStr(currReq[2], currReq[3])
         payload['ENDDATETIME'] = createDateStr(currReq[4], currReq[5])
 
-        print("START TIME")
-        print(payload['STARTDATETIME'])
-        print()
-
         apiResp = gdeltAPICall(payload)
 
         articleFreqResults.append(apiResp)
@@ -93,7 +89,6 @@ def getArtList(req):
 
     # req = flask.request.json
     reqList = req["requests"]
-    print(reqList)
 
     fullResp = []
 
@@ -109,10 +104,6 @@ def getArtList(req):
         payload['MAXRECORDS'] = MAX_ARTICLES
         payload['STARTDATETIME'] = createDateStr(currReq[2], currReq[3])
         payload['ENDDATETIME'] = createDateStr(currReq[4], currReq[5])
-
-        print("START TIME")
-        print(payload['STARTDATETIME'])
-        print()
 
         articleResults = []
         apiResp = gdeltAPICall(payload)
