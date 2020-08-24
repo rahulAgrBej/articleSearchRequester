@@ -14,7 +14,7 @@ def receiveReqs():
     return flask.jsonify(**resp)
 
 @requesterApp.app.route("/api/getFullInfo", methods=["GET"])
-def receiveFullInfoReqs()
+def receiveFullInfoReqs():
     reqs = json.loads(flask.request.args.get('fullReqs'))
     results = makeRequests.getFullInfo(reqs)
     resp = {}
