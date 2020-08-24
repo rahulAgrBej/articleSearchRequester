@@ -13,6 +13,13 @@ def receiveReqs():
     resp["results"] = results
     return flask.jsonify(**resp)
 
+@requesterApp.app.route("/api/getFullInfo", methods=["GET"])
+def receiveFullInfoReqs()
+    reqs = json.loads(flask.request.args.get('fullReqs'))
+    results = makeRequests.getFullInfo(reqs)
+    resp = {}
+    resp['results'] = results
+    return flask.jsonify(**resp)
 
 @requesterApp.app.route('/api/getTrends', methods=['GET'])
 def receiveTrendReqs():

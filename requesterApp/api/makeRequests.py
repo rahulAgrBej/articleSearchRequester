@@ -45,6 +45,34 @@ def gdeltCleanResp(resp):
 
     return results
 
+def getFullInfo(req):
+
+    reqList = req['requests']
+
+    articleFreqResults = []
+
+    for i in range(len(reqList)):
+        currReq = reqList[i]
+        fullQuery = addSourceCountry(currReq[0], currReq[1])
+
+        # builds payload for GDELT request
+        payload = {}
+        payload['QUERY'] = fullQuery
+        payload['MODE'] = 'ArtList'
+        payload['FORMAT'] = 'JSON'
+        payload['MAXRECORDS'] = MAX_ARTICLES
+        payload['STARTDATETIME'] = createDateStr(currReq[2], currReq[3])
+        payload['ENDDATETIME'] = createDateStr(currReq[4], currReq[5])
+
+        apiResp = gdeltAPICall(payload)
+        if len(apiResp.keys()) == 0:
+            apiResp['query_details'] = {}
+            apiResp['query_details']['title'] = fullQuery
+            apiResp['timeline'] = []
+
+        articleFreqResults.append(apiResp)
+    return None
+
 def getTrends(req):
 
     reqList = req['requests']
