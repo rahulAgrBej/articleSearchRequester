@@ -65,8 +65,6 @@ def getFullInfo(req):
         payload['ENDDATETIME'] = createDateStr(currReq[4], currReq[5])
 
         apiResp = gdeltAPICall(payload)
-        print(apiResp)
-        print(apiResp.content)
         if len(apiResp.keys()) == 0:
             apiResp['query_details'] = {}
             apiResp['query_details']['title'] = fullQuery
