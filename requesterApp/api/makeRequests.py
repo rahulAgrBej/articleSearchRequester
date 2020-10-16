@@ -50,10 +50,12 @@ def getFullInfo(req):
     reqList = req['requests']
 
     articleFreqResults = []
+    print("nums reqs needed to process " + str(len(reqList)))
 
     for i in range(len(reqList)):
         currReq = reqList[i]
         fullQuery = addSourceCountry(currReq[0], currReq[1])
+        print(fullQuery)
 
         # builds payload for GDELT request
         payload = {}
@@ -64,7 +66,12 @@ def getFullInfo(req):
         payload['STARTDATETIME'] = createDateStr(currReq[2], currReq[3])
         payload['ENDDATETIME'] = createDateStr(currReq[4], currReq[5])
 
+        #print(payload)
+
         apiResp = gdeltAPICall(payload)
+        apiResp['query_details'] = {}
+        apiResp['query_details']['title'] = fullQuery
+        
         if len(apiResp.keys()) == 0:
             apiResp['query_details'] = {}
             apiResp['query_details']['title'] = fullQuery
@@ -72,6 +79,7 @@ def getFullInfo(req):
 
         articleFreqResults.append(apiResp)
     
+    print("num article results returning " + str(len(articleFreqResults)))
     return articleFreqResults
 
 def getTrends(req):
