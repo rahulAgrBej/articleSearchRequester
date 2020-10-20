@@ -69,13 +69,14 @@ def getFullInfo(req):
         #print(payload)
 
         apiResp = gdeltAPICall(payload)
-        apiResp['query_details'] = {}
-        apiResp['query_details']['title'] = fullQuery
         
         if len(apiResp.keys()) == 0:
             apiResp['query_details'] = {}
             apiResp['query_details']['title'] = fullQuery
             apiResp['timeline'] = []
+        else:
+            apiResp['query_details'] = {}
+            apiResp['query_details']['title'] = fullQuery
 
         articleFreqResults.append(apiResp)
     
