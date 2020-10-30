@@ -62,6 +62,7 @@ def getFullInfo(req):
         payload['QUERY'] = fullQuery
         payload['MODE'] = 'ArtList'
         payload['FORMAT'] = 'JSON'
+        payload['TRANS'] = 'googtrans'
         payload['MAXRECORDS'] = MAX_ARTICLES
         payload['STARTDATETIME'] = createDateStr(currReq[2], currReq[3])
         payload['ENDDATETIME'] = createDateStr(currReq[4], currReq[5])
